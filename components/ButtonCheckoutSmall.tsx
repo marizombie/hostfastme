@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import apiClient from "@/libs/api";
 import config from "@/config";
 
@@ -9,36 +10,48 @@ import config from "@/config";
 // You can also change the mode to "subscription" if you want to create a subscription instead of a one-time payment
 const ButtonCheckoutSmall = ({
   priceId,
-  mode = "payment",
 }: {
   priceId: string;
-  mode?: "payment" | "subscription";
 }) => {
-  const handlePayment = async () => {
-    try {
-      const { url }: { url: string } = await apiClient.post(
-        "/stripe/create-checkout",
-        {
-          priceId,
-          successUrl: window.location.href,
-          cancelUrl: window.location.href,
-          mode,
-        }
-      );
+  // const handlePayment = async () => {
+  //   try {
+  //     const { url }: { url: string } = await apiClient.post(
+  //       "/stripe/create-checkout",
+  //       {
+  //         priceId,
+  //         successUrl: window.location.href,
+  //         cancelUrl: window.location.href,
+  //         mode,
+  //       }
+  //     );
 
-      window.location.href = url;
-    } catch (e) {
-      console.error(e);
-    }
+  //     window.location.href = url;
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // return (
+  //   <button
+  //     className="btn btn-primary btn-wide"
+  //     onClick={() => handlePayment()}
+  //   >
+  //     Get {config?.appName}
+  //   </button>
+  // );
+  const goToPricing = () =>
+  {
+    return (
+      <Link href="/#pricing" />
+    );
   };
 
   return (
-    <button
-      className="btn btn-primary btn-wide"
-      onClick={() => handlePayment()}
-    >
-      Get {config?.appName}
-    </button>
+    <Link href="/#pricing" passHref>
+      <button className="btn btn-primary btn-wide">
+        Get {config?.appName}
+      </button>
+    </Link>
   );
 };
 

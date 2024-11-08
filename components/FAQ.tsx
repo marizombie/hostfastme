@@ -21,18 +21,17 @@ const faqList: FAQItemProps[] = [
       <br/>After setting up a machine we&apos;ll move to the webserver, DNS settings and more.
       <br/>We&apos;ll say goodbyes only when you go online. <br/><br/>
       <b>There are bonuses too:</b> I'll give you cheapest domain & business email how-to, terminal tips, predictable 
-      payment setup help; in an Extended guide you&apos;ll also get an instruction on how to set up healthcheck 
-      and deployment notifications come to your Telegram!
+      payment setup help; in the Extended guide you&apos;ll also get an instruction on how to set up notifications come to your Telegram, plus how to automate SSL certificate updates!
     </div>,
   },
   {
     question: "Why should I buy it?",
     answer: <div className="space-y-2 leading-relaxed">
-      Lots of hosting platforms are taking money for being a proxy between you and the cloud machines. 
+      1. It simplifies things for those who want to try deploying in AWS or GCP!<br/>
+      2. Lots of hosting platforms are taking money for being a proxy between you and the cloud machines. 
       Why pay more, when you can do it yourself?
-      <br/>Most of them run only static websites and serverless backend. Got another idea? 
+      <br/>3. Most of proxy platforms run only static websites and serverless backend. Got another idea? 
       Why not build it and host yourself!
-      <br/>Want more control and flexibility for your project? Get {config.appName}.
     </div>,
   },
   {

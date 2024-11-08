@@ -6,7 +6,7 @@ const WithWithout = () => {
     <section className="bg-base-100">
       <div className="max-w-5xl mx-auto px-8 py-16 md:py-32 ">
         <h2 className="text-center font-extrabold text-3xl md:text-5xl tracking-tight mb-12 md:mb-20">
-          Tired of spending $$$ on simple setup? <br/> Want more control? <br/> Need constantly running backend?
+          Tired of spending $$$ on simple setup? <br/> Confused of AWS / GCP but want to get it?
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-12">
@@ -65,7 +65,8 @@ const WithWithout = () => {
                  "BONUS: predictable spendings",
                  "BONUS: cheapest domain tips",
                  "BONUS: automatic certificate updates",
-                 "BONUS: healthcheck notifications setup",
+                 "BONUS: ULTIMATE FREE notifications setup",
+                 "BONUS: reliability tips",
                  "BONUS: security tips",
               ].map((item, index) => (
                 <li key={index} className="flex gap-2 items-center">
