@@ -44,7 +44,7 @@ const Problem = () => {
     <section className="bg-neutral text-neutral-content">
       <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
         <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
-          A lot of makers avoid launching in cloud because it's too hard
+          A lot of makers avoid launching in cloud because it&apos;s too hard
           {/* A lot of makers overpay for the server setup and lock themselves in some proxy service */}
         </h2>
         {/* <p className="max-w-xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20">
@@ -64,7 +64,7 @@ const Problem = () => {
           <Arrow extraStyle="md:-scale-x-100 md:-rotate-90" />
 
           {/* <Step emoji="😊💰" text="Be happy and save money" /> */}
-          <Step emoji="😊⏳" text="Be happy and save time" />
+          <Step emoji="😊⏳💰" text="Be happy, save time and money" />
 
           <Arrow extraStyle="max-md:-scale-x-100 md:-rotate-90" />
 

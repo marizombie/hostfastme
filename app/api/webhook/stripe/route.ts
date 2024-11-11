@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({});
 }
 
-export function getWelcomeEmailHtml(guideLink: string): string {
+function getWelcomeEmailHtml(guideLink: string): string {
   return `
     <!DOCTYPE html>
     <html>
