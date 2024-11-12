@@ -20,7 +20,7 @@ const faqList: FAQItemProps[] = [
       <br/>It includes every tiny step you&apos;ll need to make, so even if you are unfamiliar with the cloud it won&apos;t be a problem.
       <br/>After setting up a machine we&apos;ll move to the webserver, DNS settings and more.
       <br/>We&apos;ll say goodbyes only when you go online. <br/><br/>
-      <b>There are bonuses too:</b> I'll give you cheapest domain & business email how-to, terminal tips, predictable 
+      <b>There are bonuses too:</b> I&apos;ll give you cheapest domain & business email how-to, terminal tips, predictable 
       payment setup help; in the Extended guide you&apos;ll also get an instruction on how to set up notifications come to your Telegram, plus how to automate SSL certificate updates!
     </div>,
   },
@@ -37,9 +37,9 @@ const faqList: FAQItemProps[] = [
   {
     question: "Are there extra payments?",
     answer: <div className="space-y-2 leading-relaxed">
-      No, you don't have to pay anything extra: GCP is free for 3 months and AWS for 1 year. 
-      And later they'll cost less then using a proxy hosting provider.
-      <br/>In fact, I'll even help you save on buying domain and business email — 
+      No, you don&apos;t have to pay anything extra: GCP is free for 3 months and AWS for 1 year. 
+      And later they&apos;ll cost less then using a proxy hosting provider.
+      <br/>In fact, I&apos;ll even help you save on buying domain and business email — 
       together they can cost you under 10$ per year!
     </div>,
   },
@@ -88,7 +88,7 @@ const faqList: FAQItemProps[] = [
     ),
   },
   {
-    question: "I don't code, is this for me?",
+    question: "I don&apos;t code, is this for me?",
     answer: (
       <p>
         Probably no. {config.appName} guides need coding skills (or at the very least — openness 
