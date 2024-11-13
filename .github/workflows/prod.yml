@@ -17,12 +17,23 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 'v21.5.0'
+
       - name: Clean temp files
         run: rm -rf node_modules
+
       - name: Install Dependencies
         run: npm install
+
       - name: Build
         run:  npm run build
+
+      - name: Prepare Production Artifact
+        run: |
+          mkdir -p ${{ vars.DESTINATION_FOLDER }}
+          cp -r .next ${{ vars.DESTINATION_FOLDER }}/
+          cp -r node_modules ${{ vars.DESTINATION_FOLDER }}/
+          cp package.json next.config.js ${{ vars.DESTINATION_FOLDER }}/
+
       - name: Archive production artifact
         uses: actions/upload-artifact@v4
         with:
@@ -42,6 +53,7 @@ jobs:
         with:
           name: build
           path: ${{ github.workspace }}/${{vars.DESTINATION_FOLDER}}
+
       - name: Transfer files via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -51,6 +63,7 @@ jobs:
           port: ${{ secrets.PORT }}
           source: ${{ vars.DESTINATION_FOLDER }}
           target: ${{ secrets.MACHINE_DEST_FOLDER }}
+          
       - name: Reload project
         uses: appleboy/ssh-action@v0.1.7
         with:
