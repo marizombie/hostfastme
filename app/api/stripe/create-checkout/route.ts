@@ -40,6 +40,10 @@ export async function POST(req: NextRequest) {
 
     const { priceId, mode, successUrl, cancelUrl } = body;
 
+    const couponId = process.env.NODE_ENV === "development"
+    ? process.env.DEFAULT_PROMO_DEV
+    : process.env.DEFAULT_PROMO_PROD;
+
     const stripeSessionURL = await createCheckout({
       priceId,
       mode,
@@ -49,8 +53,8 @@ export async function POST(req: NextRequest) {
       clientReferenceId: user?._id?.toString(),
       // If user is logged in, this will automatically prefill Checkout data like email and/or credit card for faster checkout
       user,
-      // If you send coupons from the frontend, you can pass it here
-      // couponId: body.couponId,
+      // If you send coupons from the frontend, you can pass it here body.couponId
+      couponId: couponId,
     });
 
     return NextResponse.json({ url: stripeSessionURL });
