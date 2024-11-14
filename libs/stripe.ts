@@ -77,6 +77,16 @@ export const createCheckout = async ({
         : [],
       success_url: successUrl,
       cancel_url: cancelUrl,
+      custom_fields: [
+        {
+          key: 'git_username',
+          label: {
+            type: 'custom',
+            custom: 'GitHub username',
+          },
+          type: 'text',
+        },
+      ],
       ...extraParams,
     });
 

@@ -8,8 +8,10 @@ export const addCollaborator = async (username: string, repo: string) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_COLLAB_TOKEN}`,
-          Accept: 'application/vnd.github+json',
+          'Accept': 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28'
         },
+        params: { permission: 'pull' }
       }
     );
     console.log('Collaborator added:', response.data);

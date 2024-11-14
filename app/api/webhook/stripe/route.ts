@@ -54,6 +54,20 @@ export async function POST(req: NextRequest) {
         const plan = configFile.stripe.plans.find((p) => p.priceId === priceId);
 
         if (!plan) break;
+        
+        const gitUsername = session?.custom_fields[0]?.text.value;
+        console.log(gitUsername);
+
+        const isExtended = priceId === 
+        (
+          process.env.NODE_ENV === "development" 
+          ? process.env.EXT_DEV_PRICE_ID
+          : process.env.EXT_PROD_PRICE_ID
+        )
+        
+        const repoLink = isExtended 
+        ? process.env.EXTENDED_PRODUCT_LINK 
+        : process.env.PRODUCT_LINK;
 
         const customer = (await stripe.customers.retrieve(
           customerId as string
@@ -88,7 +102,7 @@ export async function POST(req: NextRequest) {
         
         const customerEmail = session.customer_details?.email;
         
-        await addCollaborator(customerEmail, "");
+        await addCollaborator(gitUsername, repoLink);
 
         const subject = "Welcome to HostFast.me: your guide to effortless cloud hosting setup awaits! 🚀";
         const html_body = getWelcomeEmailHtml(process.env.PRODUCT_LINK);
