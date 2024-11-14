@@ -493,19 +493,15 @@ const FeaturesListicle = () => {
     <section className="py-24" id="features">
       <div className="max-w-3xl mx-auto">
         <div className="bg-base-100 max-md:px-8 max-w-3xl">
-          <p className="text-accent font-medium text-sm font-mono mb-3">
-            {/* Pure decoration, you can remove it */}
-            const launch_time = &quot;Today&quot;;
-          </p>
           <h2 className="font-extrabold text-3xl lg:text-5xl tracking-tight mb-8">
             {/* 💡 COPY TIP: Remind visitors about the value of your product. Why do they need it? */}
-            Launch your project fast, have full control, save $$$
+            Launch your website fast, have full control, save $$$
           </h2>
           <div className="text-base-content/80 leading-relaxed mb-8 lg:text-lg">
             {/* 💡 COPY TIP: Explain how your product delivers what you promise in the headline. */}
             Figure out cloud platforms, set up your virtual machine, make
             deployment work. Attach domain, configure DNS and have your 
-            project up and running with no hosting payment for 3+ months!
+            project up and running with 0$ hosting payment up to a year!
             HostFast.me walks you through every step of the way. 
           </div>
         </div>

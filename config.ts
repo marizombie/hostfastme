@@ -22,20 +22,18 @@ const config = {
         // REQUIRED — we use this to find the plan in the webhook (for instance if you want to update the user's credits based on the plan)
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1QD1aZID2Ka80gj8v9rVhKTn"
-            : "price_456",
+            ? process.env.BASIC_DEV_PRICE_ID
+            : process.env.BASIC_PROD_PRICE_ID,
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Basic",
+        name: process.env.BASIC_PRODUCT_NAME,
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for starters",
+        description: process.env.BASIC_DESCRIPTION,
         // The price you want to display, the one user will be charged on Stripe.
-        price: 29,
+        price: Number(process.env.BASIC_PRICE),
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 45,
+        priceAnchor: Number(process.env.BASIC_ANCHOR),
         features: [
-          {
-            name: "AWS/GCP server setup guide",
-          },
+          { name: "AWS/GCP server setup guide" },
           { name: "Renting machine" },
           { name: "Setting it up for work" },
           { name: "Deployment configuration" },
@@ -43,7 +41,8 @@ const config = {
           { name: "Attaching domain" },          
           { name: "Setting up free SSL certificate" },
           { name: "Securing connection" },
-          { name: "Cheapest domain & business email tips" },
+          { name: "BONUS: Cheapest domain & business email tips" },
+          { name: "BONUS: Terminal tips" },
           { name: "Yours forever" },
         ],
       },
@@ -52,21 +51,21 @@ const config = {
         isFeatured: true,
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1QD1bEID2Ka80gj8GrXmVPD8"
-            : "price_457",
-        name: "Extended",
-        description: "More power",
-        price: 49,
-        priceAnchor: 75,
+            ? process.env.EXT_DEV_PRICE_ID
+            : process.env.EXT_PROD_PRICE_ID,
+        name: process.env.EXT_PRODUCT_NAME,
+        description: process.env.EXT_DESCRIPTION,
+        price: Number(process.env.EXT_PRICE),
+        priceAnchor: Number(process.env.EXT_ANCHOR),
         features: [
           {
             name: "All in Basic +",
           },
           // { name: "Automation to save more time" },
-          { name: "Reliability tips" },
-          { name: "Additional security tips" },
-          { name: "Automating SSL certificate updates" },
-          { name: "ULTIMATE FREE notifications setup" },
+          { name: "BONUS: Reliability tips" },
+          { name: "BONUS: Additional security tips" },
+          { name: "BONUS: Automating SSL certificate updates" },
+          { name: "BONUS: ULTIMATE FREE notifications setup" },
           // { name: "Chat with other makers" },
           { name: "Future updates" },
         ],
@@ -77,11 +76,11 @@ const config = {
     // subdomain to use when sending emails, if you don't have a subdomain, just remove it. Highly recommended to have one (i.e. mg.yourdomain.com or mail.yourdomain.com)
     subdomain: "mg",
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `HostFast <noreply@mg.hostfast.me>`,
+    fromNoReply: `HostFast <noreply@hostfast.me>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Maryna from HostFast <maryna@mg.hostfast.me>`,
+    fromAdmin: `Maryna from HostFast <maryna@hostfast.me>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: "maryna@mg.hostfast.me",
+    supportEmail: process.env.SUPPORT_EMAIL,
     // When someone replies to supportEmail sent by the app, forward it to the email below (otherwise it's lost). If you set supportEmail to empty, this will be ignored.
     forwardRepliesTo: "it.with.mari@gmail.com",
   },
