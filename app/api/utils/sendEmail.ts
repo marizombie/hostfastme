@@ -14,7 +14,7 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
   });
 
   const mailOptions = {
-    from: 'maryna@hostfast.me',
+    from: process.env.SUPPORT_EMAIL,
     to,
     subject,
     html,
