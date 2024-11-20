@@ -20,14 +20,14 @@ const faqList: FAQItemProps[] = [
       <br/>It includes every tiny step you&apos;ll need to make, so even if you are unfamiliar with the cloud it won&apos;t be a problem.
       <br/>After setting up a machine we&apos;ll move to the webserver, DNS settings and more.
       <br/>We&apos;ll say goodbyes only when you go online. <br/><br/>
-      <b>There are bonuses too:</b> I&apos;ll give you cheapest domain & business email how-to, terminal tips, predictable 
-      payment setup help; in the Extended guide you&apos;ll also get an instruction on how to set up notifications come to your Telegram, plus how to automate SSL certificate updates!
+      <b>There are bonuses too:</b> I&apos;ll give you cheapest domain & business email how-to, terminal tips; in the Extended guide you&apos;ll also get predictable 
+      payment setup help, more tips on security and reliability, an instruction on how to set up notifications come to your Telegram, plus how to automate SSL certificate updates!
     </div>,
   },
   {
     question: "Why should I buy it?",
     answer: <div className="space-y-2 leading-relaxed">
-      1. It simplifies things for those who want to try deploying in AWS or GCP!<br/>
+      1. It simplifies things for those who want to try launching website using AWS or GCP!<br/>
       2. Lots of hosting platforms are taking money for being a proxy between you and the cloud machines. 
       Why pay more, when you can do it yourself?
       <br/>3. Most of proxy platforms run only static websites and serverless backend. Got another idea? 
@@ -49,6 +49,7 @@ const faqList: FAQItemProps[] = [
       For makers who want full control over their project. <br/>
       For devs, who are interested in DevOps and want to start fast.<br/>
       For those, who can code and follow coding instructions. 
+      For those who want to save time and $ launching their website.
     </div>,
   },
   {
@@ -88,11 +89,10 @@ const faqList: FAQItemProps[] = [
     ),
   },
   {
-    question: "I don&apos;t code, is this for me?",
+    question: "I don't code, is this for me?",
     answer: (
       <p>
-        Probably no. {config.appName} guides need coding skills (or at the very least — openness 
-        to get some, as I provide code) for easier steps following.
+        Probably no. {config.appName} guides need basic coding skills for easier steps following.
       </p>
     ),
   },
@@ -101,7 +101,7 @@ const faqList: FAQItemProps[] = [
     answer: (
       <p>
         {config.appName} is an informational product. It&apos;s yours forever and return is impossible, so no. 
-        <br/> However, if you have any problems be sure to contact me using email.
+        <br/> However, if you have any problems be sure to contact me using support email.
       </p>
     ),
   },

@@ -23,10 +23,11 @@ const WithWithout = () => {
                 "2h on connecting to instance",
                 "2h on DNS records",
                 "2 days on setting up a webserver",
-                "Paying for domain certificates",
-                "Unexpected problems",
-                "More 💲",
-                "More ⏳",
+                "2 days on figuring out deployments",
+                "paying for domain certificates",
+                "unexpected problems",
+                "more 💲",
+                "more ⏳",
                 "∞ Nerves",
               ].map((item, index) => (
                 <li key={index} className="flex gap-2 items-center">
