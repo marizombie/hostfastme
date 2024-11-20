@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
           : process.env.EXT_PROD_PRICE_ID
         )
         
-        const repoLink = isExtended 
+        const repoName = isExtended 
         ? process.env.EXTENDED_PRODUCT_LINK 
         : process.env.PRODUCT_LINK;
 
@@ -102,10 +102,10 @@ export async function POST(req: NextRequest) {
         
         const customerEmail = session.customer_details?.email;
         
-        await addCollaborator(gitUsername, repoLink);
+        await addCollaborator(gitUsername, repoName);
 
         const subject = "Welcome to HostFast.me: your guide to effortless cloud hosting setup awaits! 🚀";
-        const html_body = getWelcomeEmailHtml(process.env.PRODUCT_LINK);
+        const html_body = getWelcomeEmailHtml(repoName);
         await sendEmail(customerEmail, subject, html_body);
         
         // Extra: send email with user link, product page, etc...
@@ -190,7 +190,10 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({});
 }
 
-function getWelcomeEmailHtml(guideLink: string): string {
+function getWelcomeEmailHtml(repoName: string): string {
+  const guideLink = `https://github.com/marizombie/${repoName}`;
+  const email = process.env.SUPPORT_EMAIL;
+
   return `
     <!DOCTYPE html>
     <html>
@@ -218,7 +221,7 @@ function getWelcomeEmailHtml(guideLink: string): string {
             border-bottom: 1px solid #e0e0e0;
           }
           .header h1 {
-            color: #0073e6;
+            color: #646EE4;
           }
           .content {
             padding: 20px 0;
@@ -227,13 +230,13 @@ function getWelcomeEmailHtml(guideLink: string): string {
             display: inline-block;
             padding: 10px 20px;
             color: #ffffff;
-            background-color: #0073e6;
+            background-color: #1ABC9C;
             text-decoration: none;
             border-radius: 4px;
             margin: 20px 0;
           }
           .cta-button:hover {
-            background-color: #005bb5;
+            background-color: #bee4d3;
           }
           .footer {
             padding-top: 20px;
@@ -248,24 +251,25 @@ function getWelcomeEmailHtml(guideLink: string): string {
         <div class="container">
           <div class="header">
             <h1>Welcome to HostFast.me!</h1>
-            <p>Your cloud hosting setup just got a whole lot easier.</p>
+            <p>Your cloud server setup just got a whole lot easier.</p>
           </div>
           <div class="content">
             <p>Hi there,</p>
             <p>
-              Thank you for purchasing our <strong>Cloud Hosting Setup Guide</strong>! Thrilled to have you on this journey to make cloud hosting setup a breeze.
+              Thank you for purchasing <strong>HostFastMe Setup Guide</strong>! Thrilled to have you on this journey to make your cloud server setup a breeze.
             </p>
             <p>
               This guide will take you step-by-step through setting up hosting on popular cloud platforms, offering tips, shortcuts, and best practices tailored just for you. Our goal? To get you up and running quickly and smoothly, without any of the headaches while saving you money.
             </p>
             <p>Ready to dive in? Click below to access your guide and start your setup:</p>
             <a href="${guideLink}" class="cta-button">Access your guide</a>
+            <p> Your should have also gotten an email from GitHub about the same repository access.</p>
             <p>
-              If you have any questions or feedback, don't hesitate to reach out at 
-              <a href="mailto:${process.env.SUPPORT_EMAIL}">${process.env.SUPPORT_EMAIL}</a>.
+              If you have any problems, questions or feedback, don't hesitate to reach out at 
+              <a href="mailto:${email}">${email}</a>.
             </p>
             <p>Happy hosting!</p>
-            <p>Best regards,<br />The HostFast.me Owner</p>
+            <p>Best regards,<br />Maryna</p>
           </div>
           <div class="footer">
             <p>

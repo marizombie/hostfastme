@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptionsExtended = {
       ? [
           EmailProvider({
             server: process.env.EMAIL_SERVER,
-            from: config.mailgun.fromNoReply,
+            from: process.env.SUPPORT_EMAIL,
           }),
         ]
       : []),

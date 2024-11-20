@@ -25,11 +25,7 @@ export type Theme =
 export interface ConfigProps {
   appName: string;
   appDescription: string;
-  domainName: string;
-  crisp: {
-    id?: string;
-    onlyShowOnRoutes?: string[];
-  };
+  domainName: string;  
   stripe: {
     plans: {
       isFeatured?: boolean;
