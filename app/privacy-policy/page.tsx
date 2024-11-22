@@ -13,7 +13,7 @@ import config from "@/config";
 
 // I need your help to write a simple privacy policy for my website. Here is some context:
 // - Website: https://hostfast.me
-// - Name: HostFast.me
+// - Name: HostFastMe
 // - Description: Guides for developers on setting up their servers faster
 // - User data collected: name, email and payment information
 // - Non-personal data collection: web cookies
@@ -57,9 +57,9 @@ const PrivacyPolicy = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: 4th November, 2024
+          {`Last Updated: 22nd November, 2024
 
-Thank you for visiting HostFast.me ("we," "us," or "our"). This Privacy Policy outlines how we collect, use, and protect your personal and non-personal information when you use our website located at https://hostfast.me (the "Website").
+Thank you for visiting HostFastMe ("we," "us," or "our"). This Privacy Policy outlines how we collect, use, and protect your personal and non-personal information when you use our website located at https://hostfast.me (the "Website").
 
 By accessing or using the Website, you agree to the terms of this Privacy Policy. If you do not agree with the practices described in this policy, please do not use the Website.
 
@@ -95,7 +95,7 @@ If you have any questions, concerns, or requests related to this Privacy Policy,
 
 Email: maryna@hostfast.me
 
-By using HostFast.me, you consent to the terms of this Privacy Policy.`}
+By using HostFastMe, you consent to the terms of this Privacy Policy.`}
         </pre>
       </div>
     </main>

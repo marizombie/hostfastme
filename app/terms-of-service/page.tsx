@@ -13,7 +13,7 @@ import config from "@/config";
 
 // I need your help to write a simple Terms & Services for my website. Here is some context:
 // - Website: https://shipfa.st
-// - Name: HostFast.me
+// - Name: HostFastMe
 // - Contact information: marc@shipfa.st
 // - Description: A JavaScript code boilerplate to help entrepreneurs launch their startups faster
 // - Ownership: when buying a package, users can download code to create apps. They own the code but they do not have the right to resell it. They can ask for a full refund within 7 day after the purchase.
@@ -57,19 +57,19 @@ const TOS = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: September 26, 2023
+          {`Last Updated: 22nd November, 2024
 
-Welcome to HostFast.me!
+Welcome to HostFastMe!
 
-These Terms of Service ("Terms") govern your use of the HostFast.me website at https://hostfast.me ("Website") and the services provided by HostFast.me. By using our Website and services, you agree to these Terms.
+These Terms of Service ("Terms") govern your use of the HostFastMe website at https://hostfast.me ("Website") and the services provided by HostFastMe. By using our Website and services, you agree to these Terms.
 
-1. Description of HostFast.me
+1. Description of HostFastMe
 
-HostFast.me is a platform that offers detailed textual instructions with images and code samples to assist developers in launching their websites more efficiently.
+HostFastMe is a platform that offers detailed textual instructions with images and code samples to assist developers in launching their websites more efficiently.
 
 2. Ownership and Usage Rights
 
-When you purchase a package from HostFast.me, you gain the right to download and use the code provided for creating applications. You own the code you create but do not have the right to resell it. We offer a full refund within 7 days of purchase, as specified in our refund policy.
+When you purchase a package from HostFastMe, you gain the right to download and use the code provided for creating applications. You own the code you create but do not have the right to resell it. We offer a full refund within 7 days of purchase, as specified in our refund policy.
 
 3. User Data and Privacy
 
@@ -89,7 +89,7 @@ We may update these Terms from time to time. Users will be notified of any chang
 
 For any questions or concerns regarding these Terms of Service, please contact us at maryna@hostfast.me.
 
-Thank you for using HostFast.me!`}
+Thank you for using HostFastMe!`}
         </pre>
       </div>
     </main>

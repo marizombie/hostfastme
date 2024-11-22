@@ -31,7 +31,7 @@ const Hero = () => {
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
           Easy to follow guides with detailed instructions for your projects which 
-          save you time and money: set up straight on cloud avoiding proxy providers.
+          save you time and money: set up your server straight on cloud avoiding proxy providers.
         </p>
         {/* <button className="btn btn-primary btn-wide">
           Get {config.appName}
