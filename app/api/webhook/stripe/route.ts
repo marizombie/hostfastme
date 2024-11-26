@@ -202,7 +202,7 @@ function getWelcomeEmailHtml(repoName: string): string {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Welcome to HostFast.me!</title>
+        <title>Welcome to HostFastMe!</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -254,7 +254,7 @@ function getWelcomeEmailHtml(repoName: string): string {
       <body>
         <div class="container">
           <div class="header">
-            <h1>Welcome to HostFast.me!</h1>
+            <h1>Welcome to HostFastMe!</h1>
             <p>Your cloud server setup just got a whole lot easier.</p>
           </div>
           <div class="content">
@@ -279,7 +279,7 @@ function getWelcomeEmailHtml(repoName: string): string {
             <p>
               You received this email because you recently purchased a product from HostFast.me.
               <br />
-              HostFast.me, helping developers to host websites efficiently
+              HostFastMe, helping developers to host websites efficiently
             </p>
           </div>
         </div>
