@@ -44,7 +44,7 @@ jobs:
           PRODUCT_LINK: ${{ vars.PRODUCT_LINK }}
           EXTENDED_PRODUCT_LINK: ${{ vars.EXTENDED_PRODUCT_LINK }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          SMTP_USER: ${{ vars.SMTP_USER }}
+          SUPPORT_EMAIL: ${{ vars.SUPPORT_EMAIL }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
