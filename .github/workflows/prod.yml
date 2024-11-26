@@ -25,6 +25,33 @@ jobs:
         run: npm install --omit=dev
 
       - name: Build
+        env:
+          NODE_ENV: ${{ vars.NODE_ENV }}
+          BASIC_PRODUCT_NAME: ${{ vars.BASIC_PRODUCT_NAME }}
+          BASIC_DESCRIPTION: ${{ vars.BASIC_DESCRIPTION }}
+          BASIC_PRICE: ${{ vars.BASIC_PRICE }}
+          BASIC_ANCHOR: ${{ vars.BASIC_ANCHOR }}
+          BASIC_PROD_PRICE_ID: ${{ secrets.BASIC_PROD_PRICE_ID }}
+          BASIC_DEV_PRICE_ID: ${{ secrets.BASIC_DEV_PRICE_ID }}
+          EXT_PRODUCT_NAME: ${{ vars.EXT_PRODUCT_NAME }}
+          EXT_DESCRIPTION: ${{ vars.EXT_DESCRIPTION }}
+          EXT_PRICE: ${{ vars.EXT_PRICE }}
+          EXT_ANCHOR: ${{ vars.EXT_ANCHOR }}
+          EXT_PROD_PRICE_ID: ${{ secrets.EXT_PROD_PRICE_ID }}
+          EXT_DEV_PRICE_ID: ${{ secrets.EXT_DEV_PRICE_ID }}
+          GITHUB_COLLAB_TOKEN: ${{ secrets.COLLAB_TOKEN }}
+          NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          PRODUCT_LINK: ${{ vars.PRODUCT_LINK }}
+          EXTENDED_PRODUCT_LINK: ${{ vars.EXTENDED_PRODUCT_LINK }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SMTP_USER: ${{ vars.SMTP_USER }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+
         run: npm run build
 
       - name: Prepare Production Artifact
@@ -72,4 +99,7 @@ jobs:
           key: ${{ secrets.GIT_SSH }}
           port: ${{ secrets.PORT }}
           script: |
+            cd ${{ vars.DESTINATION_FOLDER }}
+            chmod +x node_modules/next/dist/bin/next
+            sudo cp -r .next/static/* ${{ vars.STATIC_LOCATION }}
             pm2 reload hf --update-env
