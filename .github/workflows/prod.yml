@@ -26,7 +26,6 @@ jobs:
 
       - name: Build
         env:
-          NODE_ENV: ${{ vars.NODE_ENV }}
           BASIC_PRODUCT_NAME: ${{ vars.BASIC_PRODUCT_NAME }}
           BASIC_DESCRIPTION: ${{ vars.BASIC_DESCRIPTION }}
           BASIC_PRICE: ${{ vars.BASIC_PRICE }}
