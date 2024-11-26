@@ -101,19 +101,23 @@ export async function POST(req: NextRequest) {
         await user.save();
         
         const customerEmail = session.customer_details?.email;
-        
-        await addCollaborator(gitUsername, repoName);
+        try {          
+          const gitUsername = session?.custom_fields[0]?.text.value;
+          if (!gitUsername) {
+            throw Error('GitHub username retrieval failed');
+          }
 
+          await addCollaborator(gitUsername, repoName);
+        } catch (e) {
+          console.error("Collaborator adding issue:" + e?.message);
+        }
         const subject = "Welcome to HostFast.me: your guide to effortless cloud hosting setup awaits! 🚀";
         const html_body = getWelcomeEmailHtml(repoName);
-        await sendEmail(customerEmail, subject, html_body);
-        
-        // Extra: send email with user link, product page, etc...
-        // try {
-        //   await sendEmail(...);
-        // } catch (e) {
-        //   console.error("Email issue:" + e?.message);
-        // }
+        try {
+          await sendEmail(customerEmail, subject, html_body);
+        } catch (e) {
+          console.error("Email issue:" + e?.message);
+        }
 
         break;
       }
