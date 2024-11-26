@@ -8,7 +8,7 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
     port: Number(process.env.SMTP_PORT) || 0, // Use 465 for secure connections
     secure: true, // true for 465, false for other ports
     auth: {
-      user: process.env.SUPPORT_EMAIL, // Your SMTP username
+      user: process.env.SMTP_USER, // Your SMTP username
       pass: process.env.SMTP_PASS, // Your SMTP password
     },
   });
