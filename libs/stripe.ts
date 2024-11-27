@@ -93,7 +93,7 @@ export const createCheckout = async ({
     return stripeSession.url;
   } catch (e) {
     console.error(e);
-    return null;
+    throw Error(e);
   }
 };
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import apiClient from "@/libs/api";
 import config from "@/config";
+import toast from "react-hot-toast";
 
 // This component is used to create Stripe Checkout Sessions
 // It calls the /api/stripe/create-checkout route with the priceId, successUrl and cancelUrl
@@ -21,7 +22,8 @@ const ButtonCheckout = ({
     setIsLoading(true);
 
     try {
-      const { url }: { url: string } = await apiClient.post(
+      const { url, couponId }: { url: string, couponId: string } = 
+      await apiClient.post(
         "/stripe/create-checkout",
         {
           priceId,
@@ -32,8 +34,15 @@ const ButtonCheckout = ({
       );
 
       window.location.href = url;
+
+      if (couponId) {
+        toast.success(`Coupon applied successfully`);
+      } else {
+        toast.error("No valid coupon applied, proceeding without discount");
+      }
     } catch (e) {
       console.error(e);
+      toast.error("Failed to start transaction, please try again");
     }
 
     setIsLoading(false);
