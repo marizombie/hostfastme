@@ -61,7 +61,7 @@ jobs:
           mkdir -p ${{ vars.DESTINATION_FOLDER }}
           cp -r .next ${{ vars.DESTINATION_FOLDER }}/
           cp -r node_modules ${{ vars.DESTINATION_FOLDER }}/
-          cp package.json next.config.js ${{ vars.DESTINATION_FOLDER }}/
+          cp package.json next.config.ts ${{ vars.DESTINATION_FOLDER }}/
 
       - name: Archive production artifact
         uses: actions/upload-artifact@v4
