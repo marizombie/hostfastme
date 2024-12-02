@@ -4,6 +4,7 @@ import { useState } from "react";
 import apiClient from "@/libs/api";
 import config from "@/config";
 import toast from "react-hot-toast";
+import { usePlausible } from 'next-plausible'
 
 // This component is used to create Stripe Checkout Sessions
 // It calls the /api/stripe/create-checkout route with the priceId, successUrl and cancelUrl
@@ -17,9 +18,11 @@ const ButtonCheckout = ({
   mode?: "payment" | "subscription";
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const plausible = usePlausible();
 
   const handlePayment = async () => {
     setIsLoading(true);
+    plausible('CheckoutClick');
 
     try {
       const { url, couponId }: { url: string, couponId: string } = 
