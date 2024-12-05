@@ -502,7 +502,7 @@ const FeaturesListicle = () => {
             Figure out cloud platforms, set up your virtual machine, make
             deployment work. Attach domain, configure DNS and have your 
             project up and running with 0$ hosting payment up to a year!
-            HostFast.me walks you through every step of the way. 
+            HostFastMe walks you through every step of the way. 
           </div>
         </div>
       </div>
