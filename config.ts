@@ -6,7 +6,7 @@ const config = {
   appName: "HostFastMe",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "HostFastMe is your key to time and money efficient server setup",
+    "Host any webapp for free in hours, not days!",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "hostfast.me",
   stripe: {

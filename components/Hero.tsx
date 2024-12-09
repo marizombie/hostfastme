@@ -23,11 +23,11 @@ const Hero = () => {
         </a> */}
 
         <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight md:-mb-4">
-          Host website for free 
-          <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed ">
-          up to a year
-          </span>
-          and save $$$ later! 
+          Host any webapp for free   
+          <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed">
+          in hours
+          </span>,
+          <p>not days!</p> 
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
           Easy to follow guides with detailed instructions for your projects which 
@@ -44,7 +44,7 @@ const Hero = () => {
       <div className="lg:w-full">
         <Image
           src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Product Demo"
+          alt="BG image"
           className="w-full"
           priority={true}
           width={500}

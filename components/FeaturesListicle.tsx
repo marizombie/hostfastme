@@ -495,7 +495,7 @@ const FeaturesListicle = () => {
         <div className="bg-base-100 max-md:px-8 max-w-3xl">
           <h2 className="font-extrabold text-3xl lg:text-5xl tracking-tight mb-8">
             {/* 💡 COPY TIP: Remind visitors about the value of your product. Why do they need it? */}
-            Launch your website fast, have full control, save $$$
+            Launch your webapp fast, have full control, save $$$
           </h2>
           <div className="text-base-content/80 leading-relaxed mb-8 lg:text-lg">
             {/* 💡 COPY TIP: Explain how your product delivers what you promise in the headline. */}
