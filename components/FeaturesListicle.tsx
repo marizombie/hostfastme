@@ -490,7 +490,7 @@ const FeaturesListicle = () => {
   }, [featureSelected, hasClicked]);
 
   return (
-    <section className="py-24" id="features">
+    <section className="py-2" id="features">
       <div className="max-w-3xl mx-auto">
         <div className="bg-base-100 max-md:px-8 max-w-3xl">
           <h2 className="font-extrabold text-3xl lg:text-5xl tracking-tight mb-8">
