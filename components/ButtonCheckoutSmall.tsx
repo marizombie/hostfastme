@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import apiClient from "@/libs/api";
+// import apiClient from "@/libs/api";
 import config from "@/config";
 
 // This component is used to create Stripe Checkout Sessions
@@ -39,12 +39,6 @@ const ButtonCheckoutSmall = ({
   //     Get {config?.appName}
   //   </button>
   // );
-  const goToPricing = () =>
-  {
-    return (
-      <Link href="/#pricing" />
-    );
-  };
 
   return (
     <Link href="/#pricing" passHref>

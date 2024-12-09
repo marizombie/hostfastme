@@ -7,6 +7,7 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import WithWithout from '@/components/WithWithout';
+import TryForFree from '@/components/TryForFree';
 import FeaturesListicle from '@/components/FeaturesListicle';
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <Problem />
         <WithWithout />
         <FeaturesListicle />
+        <TryForFree />
         <Pricing />
         <FAQ />
         <CTA />
