@@ -7,6 +7,7 @@ import configFile from "@/config";
 import User from "@/models/User";
 import { sendEmail } from "../../utils/sendEmail";
 import { addCollaborator } from "../../utils/addCollaborator";
+import { sendTelegramMessage } from "../../utils/sendTelegram";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-08-16",  // TODO: update this when Stripe updates their API
@@ -102,15 +103,19 @@ export async function POST(req: NextRequest) {
         await user.save();
         
         const customerEmail = session.customer_details?.email;
-        try {          
+        try {
           const gitUsername = session?.custom_fields[0]?.text.value;
           if (!gitUsername) {
+            sendTelegramMessage('Github username not found:' + gitUsername);
             throw Error('GitHub username retrieval failed');
           }
 
           await addCollaborator(gitUsername, repoName);
+
+          sendTelegramMessage('Github collaborator added:' + gitUsername);
         } catch (e) {
           console.error("Collaborator adding issue:" + e?.message);
+          sendTelegramMessage("Collaborator adding issue:" + e?.message);
         }
         const subject = "Welcome to HostFast.me: your guide to effortless cloud hosting setup awaits! 🚀";
         const html_body = getWelcomeEmailHtml(repoName);
@@ -118,12 +123,14 @@ export async function POST(req: NextRequest) {
           await sendEmail(customerEmail, subject, html_body);
         } catch (e) {
           console.error("Email issue:" + e?.message);
+          sendTelegramMessage('Welcome email sending issue:' + e?.message);
         }
 
         break;
       }
 
       case "checkout.session.expired": {
+        sendTelegramMessage("User didn't complete the transaction, checkout expired");
         // User didn't complete the transaction
         // You don't need to do anything here, by you can send an email to the user to remind him to complete the transaction, for instance
         break;
@@ -177,6 +184,7 @@ export async function POST(req: NextRequest) {
       }
 
       case "invoice.payment_failed":
+        sendTelegramMessage("Payment failed");
         // A payment failed (for instance the customer does not have a valid payment method)
         // ❌ Revoke access to the product
         // ⏳ OR wait for the customer to pay (more friendly):
@@ -190,6 +198,7 @@ export async function POST(req: NextRequest) {
     }
   } catch (e) {
     console.error("stripe error: ", e.message);
+    sendTelegramMessage("stripe error: " + e.message);
   }
 
   return NextResponse.json({});
