@@ -20,6 +20,8 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // By default, it'll store the user in the database
 // See more: https://shipfa.st/docs/features/payments
 export async function POST(req: NextRequest) {
+  
+  sendTelegramMessage('In stripe webhook');
   await connectMongo();
 
   const body = await req.text();
@@ -30,7 +32,7 @@ export async function POST(req: NextRequest) {
   let eventType;
   let event;
 
-  // verify Stripe event is legit
+  sendTelegramMessage('Checking secret');
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
@@ -40,11 +42,14 @@ export async function POST(req: NextRequest) {
 
   eventType = event.type;
 
+  sendTelegramMessage('Stripe event type: ' + eventType);
   try {
     switch (eventType) {
       case "checkout.session.completed": {
         // First payment is successful and a subscription is created (if mode was set to "subscription" in ButtonCheckout)
         // ✅ Grant access to the product
+        // showNotification('success', 'Payment successful, purchase is being progressed');
+        sendTelegramMessage('Stripe session completed');
         const stripeObject: Stripe.Checkout.Session = event.data
           .object as Stripe.Checkout.Session;
 
