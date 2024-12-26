@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { Viewport } from "next";
-import PlausibleProvider from "next-plausible";
+// import UmamiProvider from "next-umami";
 import { getSEOTags } from "@/libs/seo";
 import ClientLayout from "@/components/LayoutClient";
 import config from "@/config";
@@ -25,7 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" data-theme={config.colors.theme} className={font.className}>
       {config.domainName && (
         <head>
-          <PlausibleProvider domain={config.domainName} />
+          <script defer src={config.umamiScriptPath} 
+                  data-website-id={config.umamiWebsiteId}></script>
+          {/* <UmamiProvider websiteId={config.domainName} /> */}
         </head>
       )}
       <body>

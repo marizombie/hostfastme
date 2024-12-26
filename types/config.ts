@@ -25,7 +25,9 @@ export type Theme =
 export interface ConfigProps {
   appName: string;
   appDescription: string;
-  domainName: string;  
+  domainName: string;
+  umamiWebsiteId: string;
+  umamiScriptPath: string;
   stripe: {
     plans: {
       isFeatured?: boolean;
