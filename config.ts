@@ -9,7 +9,7 @@ const config = {
     "Host any webapp for free in hours, not days!",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "hostfast.me",
-  umamiScriptPath: "https://hostfast.me/analytics", //"https://cloud.umami.is/script.js" 
+  umamiScriptPath: process.env.UMAMI_PATH, //"https://cloud.umami.is/script.js" 
   umamiWebsiteId: process.env.UMAMI_WEBSITE_ID,
   stripe: {
     // Create multiple plans in your Stripe dashboard, then add them here. You can add as many plans as you want, just make sure to add the priceId
