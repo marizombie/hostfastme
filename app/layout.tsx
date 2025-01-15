@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { Viewport } from "next";
-import Script from "next/script";
+// import Script from "next/script";
 // import UmamiProvider from "next-umami";
 import { getSEOTags } from "@/libs/seo";
 import ClientLayout from "@/components/LayoutClient";
+import UmamiScript from "@/components/UmamiScript";
 import config from "@/config";
 import "./globals.css";
 
@@ -26,12 +27,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" data-theme={config.colors.theme} className={font.className}>
       {config.domainName && (
         <head>
+          <UmamiScript/>
           {/* <script defer src={config.umamiScriptPath} 
                   data-website-id={config.umamiWebsiteId}></script> */}
 
-          <Script src={config.umamiScriptPath} 
+          {/* <Script src={config.umamiScriptPath} 
                   strategy="afterInteractive"
-                  data-website-id={config.umamiWebsiteId}></Script>
+                  data-website-id={config.umamiWebsiteId}></Script> */}
           {/* <UmamiProvider websiteId={config.domainName} /> */}
         </head>
       )}
