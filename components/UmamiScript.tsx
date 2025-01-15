@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import config from "@/config";
 
-export default function UmamiScript(): JSX.Element | null {
+export default function UmamiScript(): null {
   useEffect(() => {
     if (!document.getElementById("umami-script")) {
       const script = document.createElement("script");
