@@ -21,7 +21,6 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // See more: https://shipfa.st/docs/features/payments
 export async function POST(req: NextRequest) {
   
-  sendTelegramMessage('In stripe webhook');
   await connectMongo();
 
   const body = await req.text();
@@ -32,7 +31,6 @@ export async function POST(req: NextRequest) {
   let eventType;
   let event;
 
-  sendTelegramMessage('Checking secret');
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
@@ -49,7 +47,8 @@ export async function POST(req: NextRequest) {
         // First payment is successful and a subscription is created (if mode was set to "subscription" in ButtonCheckout)
         // ✅ Grant access to the product
         // showNotification('success', 'Payment successful, purchase is being progressed');
-        sendTelegramMessage('Stripe session completed');
+
+        // console.log('payment successful');
         const stripeObject: Stripe.Checkout.Session = event.data
           .object as Stripe.Checkout.Session;
 
@@ -59,11 +58,11 @@ export async function POST(req: NextRequest) {
         const priceId = session?.line_items?.data[0]?.price.id;
         const userId = stripeObject.client_reference_id;
         const plan = configFile.stripe.plans.find((p) => p.priceId === priceId);
-
-        if (!plan) break;
         
-        const gitUsername = session?.custom_fields[0]?.text.value;
-        console.log(gitUsername);
+        if (!plan) {
+          sendTelegramMessage('Plan is empty');
+          break;
+        }
 
         const isExtended = priceId === 
         (
@@ -97,11 +96,13 @@ export async function POST(req: NextRequest) {
             await user.save();
           }
         } else {
-          console.error("No user found");
+          console.error("No stripe user found");
+          sendTelegramMessage('No stripe user found');
           throw new Error("No user found");
         }
 
-        // Update user data + Grant user access to your product. It's a boolean in the database, but could be a number of credits, etc...
+        // Update user data + Grant user access to your product. It's a boolean in the database, 
+        // but could be a number of credits, etc...
         user.priceId = priceId;
         user.customerId = customerId;
         user.hasAccess = true;
@@ -111,7 +112,7 @@ export async function POST(req: NextRequest) {
         try {
           const gitUsername = session?.custom_fields[0]?.text.value;
           if (!gitUsername) {
-            sendTelegramMessage('Github username not found:' + gitUsername);
+            sendTelegramMessage('Github username not given:' + gitUsername);
             throw Error('GitHub username retrieval failed');
           }
 
