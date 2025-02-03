@@ -23,17 +23,19 @@ const ButtonCheckout = ({
   const handlePayment = async () => {
     setIsLoading(true);
     // plausible('CheckoutClick');
+    const payload = {
+      priceId,
+      successUrl: window.location.href, //`${window.location.href}?status=success`,
+      cancelUrl: window.location.href, //`${window.location.href}?status=canceled`,
+      // couponId: coupon,
+      mode,
+    };
 
     try {
       const { url, couponId }: { url: string, couponId: string } = 
       await apiClient.post(
         "/stripe/create-checkout",
-        {
-          priceId,
-          successUrl: window.location.href,
-          cancelUrl: window.location.href,
-          mode,
-        }
+        payload
       );
 
       window.location.href = url;
@@ -50,6 +52,25 @@ const ButtonCheckout = ({
 
     setIsLoading(false);
   };
+  
+  // useEffect(() => {
+  //   // Check to see if this is a redirect back from Checkout
+  //   console.log('running check success or cancel');
+  //   // const query = new URLSearchParams(window.location.search); //query.get('success')
+  //   const currentQuery = window.location.search;
+  //   if (currentQuery.includes('success')) {
+  //     console.log('Order placed! You will receive an email confirmation.');
+  //     toast.success('Order placed! You will receive an email confirmation.');
+  //   }
+
+  //   if (currentQuery.includes('canceled')) {
+  //     console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+  //     toast.error('Order canceled -- continue to shop around and checkout when you’re ready.');
+  //   }
+  //   // redirect home after this to remove params? 
+  //   // import { redirect } from 'next/navigation'
+  //   redirect('/');
+  // }, []);
 
   return (
     <button

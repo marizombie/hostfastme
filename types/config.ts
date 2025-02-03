@@ -40,6 +40,7 @@ export interface ConfigProps {
         name: string;
       }[];
     }[];
+    zeroPriceId: string;
   };
   aws?: {
     bucket?: string;

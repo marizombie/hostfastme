@@ -7,7 +7,10 @@ import configFile from "@/config";
 import User from "@/models/User";
 import { sendEmail } from "../../utils/sendEmail";
 import { addCollaborator } from "../../utils/addCollaborator";
+import { validateGitHubUsername } from "../../utils/validateGitHub";
 import { sendTelegramMessage } from "../../utils/sendTelegram";
+import { emitNotification, emitMessage } from "@/libs/socketServer";
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-08-16",  // TODO: update this when Stripe updates their API
@@ -49,6 +52,13 @@ export async function POST(req: NextRequest) {
         // showNotification('success', 'Payment successful, purchase is being progressed');
 
         // console.log('payment successful');
+        emitMessage("checkout.session.completed");
+        emitNotification({
+          status: "success",
+          message: "Payment successful",
+        });
+        // toast.success('Payment successful');
+
         const stripeObject: Stripe.Checkout.Session = event.data
           .object as Stripe.Checkout.Session;
 
@@ -116,28 +126,56 @@ export async function POST(req: NextRequest) {
             throw Error('GitHub username retrieval failed');
           }
 
+          const isValidated = await validateGitHubUsername(gitUsername);
+
+          if (!isValidated) {
+            sendTelegramMessage('Github username validation failed:' + gitUsername);
+            throw Error('GitHub username validation failed');
+          }
+
           await addCollaborator(gitUsername, repoName);
 
           sendTelegramMessage('Github collaborator added:' + gitUsername);
+          emitNotification({
+            status: "success",
+            message: "Your access has been granted, check your email",
+          });
         } catch (e) {
           console.error("Collaborator adding issue:" + e?.message);
-          sendTelegramMessage("Collaborator adding issue:" + e?.message);
+          sendTelegramMessage("Collaborator " + customerEmail + " adding issue:" + e?.message);
+          // emitNotification({
+          //   status: "error",
+          //   message: "Error providing you access",
+          // });
+          // toast.error('There was a problem with providing an access to the product, please contact support')
+          // throw new Error('There was a problem with providing an access to the product, please contact support' + e?.message)
         }
         const subject = "Welcome to HostFast.me: your guide to effortless cloud hosting setup awaits! 🚀";
         const html_body = getWelcomeEmailHtml(repoName);
         try {
           await sendEmail(customerEmail, subject, html_body);
+          
+          emitNotification({
+            status: "success",
+            message: "Email sent successfully",
+          });
+          // toast.success('Email with purchase details has been sent. You are added as a collaborator to the repository now.');
         } catch (e) {
           console.error("Email issue:" + e?.message);
           sendTelegramMessage('Welcome email sending issue:' + e?.message);
+          emitNotification({
+            status: "error",
+            message: "Error sending you email",
+          });
+            // throw new Error("Email issue:" + e?.message)
+            // toast.error('There was a problem with sending an email')
         }
 
         break;
       }
 
       case "checkout.session.expired": {
-        sendTelegramMessage("User didn't complete the transaction, checkout expired");
-        // User didn't complete the transaction
+        // User didn't complete the transaction OR IT JUST EXPIRED
         // You don't need to do anything here, by you can send an email to the user to remind him to complete the transaction, for instance
         break;
       }

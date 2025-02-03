@@ -14,9 +14,11 @@ export const addCollaborator = async (username: string, repo: string) => {
         params: { permission: 'pull' }
       }
     );
-    console.log('Collaborator added:', response.data);
-  } catch (error) {
+    
+    console.log(`Collaborator added successfully ${response.data}`);
+    // showNotification('success', `Collaborator added successfully ${response.data}`);
+  } catch (error) {    
     console.error('Error adding collaborator:', error);
-    throw error;
+    // showNotification('error', `Error adding collaborator: ${error}`);
   }
 };

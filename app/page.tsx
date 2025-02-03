@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import WithWithout from '@/components/WithWithout';
 import TryForFree from '@/components/TryForFree';
 import FeaturesListicle from '@/components/FeaturesListicle';
+// import WebSocketTester from '@/components/TestWebSocket';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Header />
       </Suspense>
       <main>
+        {/* <WebSocketTester /> */}
         <Hero />
         <Problem />
         <WithWithout />
