@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
@@ -21,6 +21,33 @@ interface Notification {
 // 3. Toaster: Show Success/Error messages anywhere from the app with toast()
 // 4. Tooltip: Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content=""
 const ClientLayout = ({ children }: { children: ReactNode }) => {
+  const clientIdMatch = window.location.href.match(/[?&]clientId=([^&]+)/);
+  const clientId = clientIdMatch ? clientIdMatch[1] : null;
+  useEffect(() => {
+    if (clientId) {
+    const eventSource = new EventSource(`/api/sse?clientId=${clientId}`);
+
+    eventSource.onmessage = (event: MessageEvent) => {
+      console.log("onmessage")
+      console.log(event)
+      const data = JSON.parse(event.data) as { type: string; message: string };
+      if (data.message !== "Connected") {
+        toast(data.message)
+      }
+    };
+
+    eventSource.onerror = () => {
+      console.error('SSE error');
+      eventSource.close();
+      localStorage.removeItem('clientId')
+    };
+
+    return () => {
+      eventSource.close();
+      localStorage.removeItem('clientId')
+    };
+  }
+  }, []);
   // useWebSocket();
   // useEffect(() => {
   //   const socket = io('http://localhost:3002'); // Replace with your backend server URL

@@ -23,10 +23,12 @@ const ButtonCheckout = ({
   const handlePayment = async () => {
     setIsLoading(true);
     // plausible('CheckoutClick');
+    localStorage.setItem('clientId', Math.random().toString(36).substring(7))
+    const eventSource = new EventSource(`/api/sse?clientId=${localStorage.getItem('clientId')}`);
     const payload = {
       priceId,
-      successUrl: window.location.href, //`${window.location.href}?status=success`,
-      cancelUrl: window.location.href, //`${window.location.href}?status=canceled`,
+      successUrl: `${window.location.href}?clientId=${localStorage.getItem('clientId')}`, //`${window.location.href}?status=success`,
+      cancelUrl:  `${window.location.href}?clientId=${localStorage.getItem('clientId')}`, //`${window.location.href}?status=canceled`,
       // couponId: coupon,
       mode,
     };

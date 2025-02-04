@@ -10,6 +10,7 @@ import { addCollaborator } from "../../utils/addCollaborator";
 import { validateGitHubUsername } from "../../utils/validateGitHub";
 import { sendTelegramMessage } from "../../utils/sendTelegram";
 import { emitNotification, emitMessage } from "@/libs/socketServer";
+import { sendNotificationToClient } from "../../sse/route";
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -40,7 +41,6 @@ export async function POST(req: NextRequest) {
     console.error(`Webhook signature verification failed. ${err.message}`);
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
-
   eventType = event.type;
 
   sendTelegramMessage('Stripe event type: ' + eventType);
@@ -127,11 +127,21 @@ export async function POST(req: NextRequest) {
           }
 
           const isValidated = await validateGitHubUsername(gitUsername);
-
           if (!isValidated) {
             sendTelegramMessage('Github username validation failed:' + gitUsername);
+            const clientIdMatch = (event.data.object as any).success_url.match(/[?&]clientId=([^&]+)/);
+            const clientId = clientIdMatch ? clientIdMatch[1] : null;
+            if (clientId) {
+              await new Promise(res => setTimeout(res, 5000));
+              sendNotificationToClient(clientId, {
+                type: 'error',
+                message: 'GitHub username validation failed',
+              });
+            } else {
+              console.error('Client ID not found in PaymentIntent metadata');
+            }
             throw Error('GitHub username validation failed');
-          }
+          } else {
 
           await addCollaborator(gitUsername, repoName);
 
@@ -140,6 +150,7 @@ export async function POST(req: NextRequest) {
             status: "success",
             message: "Your access has been granted, check your email",
           });
+        }
         } catch (e) {
           console.error("Collaborator adding issue:" + e?.message);
           sendTelegramMessage("Collaborator " + customerEmail + " adding issue:" + e?.message);
