@@ -10,7 +10,7 @@ import { addCollaborator } from "../../utils/addCollaborator";
 import { validateGitHubUsername } from "../../utils/validateGitHub";
 import { sendTelegramMessage } from "../../utils/sendTelegram";
 import { emitNotification, emitMessage } from "@/libs/socketServer";
-import { sendNotificationToClient } from "../../sse/route";
+import { sendNotificationToClient } from "../../utils/sse";
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {

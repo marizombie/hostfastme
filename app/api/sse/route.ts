@@ -1,8 +1,6 @@
 // app/api/sse/route.ts
 import { NextResponse } from 'next/server';
-
-// Store connected clients with a unique identifier
-const clients = new Map<string, ReadableStreamDefaultController>();
+import { clients } from '../utils/sse';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -20,7 +18,7 @@ export async function GET(request: Request) {
 
       // Send initial message to the client
       const data = JSON.stringify({ type: 'connected', message: 'Connected' });
-      controller.enqueue(`data: ${data}\n\n`);
+      controller.enqueue(new TextEncoder().encode(`data: ${data}\n\n`));
 
       // Handle client disconnect
       request.signal.onabort = () => {
@@ -38,13 +36,4 @@ export async function GET(request: Request) {
       Connection: 'keep-alive',
     },
   });
-}
-
-// Function to send a notification to a specific client
-export function sendNotificationToClient(clientId: string, data: { type: string; message: string }) {
-  const controller = clients.get(clientId);
-  if (controller) {
-    const message = `data: ${JSON.stringify(data)}\n\n`;
-    controller.enqueue(message);
-  }
 }

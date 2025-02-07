@@ -21,9 +21,9 @@ interface Notification {
 // 3. Toaster: Show Success/Error messages anywhere from the app with toast()
 // 4. Tooltip: Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content=""
 const ClientLayout = ({ children }: { children: ReactNode }) => {
-  const clientIdMatch = window.location.href.match(/[?&]clientId=([^&]+)/);
-  const clientId = clientIdMatch ? clientIdMatch[1] : null;
   useEffect(() => {
+    const clientIdMatch = window.location.href.match(/[?&]clientId=([^&]+)/);
+    const clientId = clientIdMatch ? clientIdMatch[1] : null;
     if (clientId) {
     const eventSource = new EventSource(`/api/sse?clientId=${clientId}`);
 
