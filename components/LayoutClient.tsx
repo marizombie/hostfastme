@@ -28,8 +28,6 @@ const ClientLayout = ({ children }: { children: ReactNode }) => {
     const eventSource = new EventSource(`/api/sse?clientId=${clientId}`);
 
     eventSource.onmessage = (event: MessageEvent) => {
-      console.log("onmessage")
-      console.log(event)
       const data = JSON.parse(event.data) as { type: string; message: string };
       if (data.message !== "Connected") {
         toast(data.message)

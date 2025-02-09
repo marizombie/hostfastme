@@ -43,7 +43,6 @@ export async function POST(req: NextRequest) {
   }
   eventType = event.type;
 
-  sendTelegramMessage('Stripe event type: ' + eventType);
   try {
     switch (eventType) {
       case "checkout.session.completed": {
