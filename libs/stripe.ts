@@ -85,6 +85,7 @@ export const createCheckout = async ({
             custom: 'GitHub username',
           },
           type: 'text',
+          optional: false
         },
       ],
       ...extraParams,
