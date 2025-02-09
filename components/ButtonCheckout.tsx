@@ -24,7 +24,6 @@ const ButtonCheckout = ({
     setIsLoading(true);
     // plausible('CheckoutClick');
     localStorage.setItem('clientId', Math.random().toString(36).substring(7))
-    const eventSource = new EventSource(`/api/sse?clientId=${localStorage.getItem('clientId')}`);
     const payload = {
       priceId,
       successUrl: `${window.location.href}?clientId=${localStorage.getItem('clientId')}`, //`${window.location.href}?status=success`,

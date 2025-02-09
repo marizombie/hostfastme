@@ -35,8 +35,8 @@ io.on("connection", (socket: Socket) => {
 
 });
 
-httpServer.listen(Number(process.env.SOCKET_PORT), 
-() => console.log(`Socket.IO server running on port ${process.env.SOCKET_PORT}`));
+// httpServer.listen(Number(process.env.SOCKET_PORT), 
+// () => console.log(`Socket.IO server running on port ${process.env.SOCKET_PORT}`));
 
 
 export const emitNotification = (notification: Notification) => {

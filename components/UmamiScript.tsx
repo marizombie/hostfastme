@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import config from "@/config";
 
 export default function UmamiScript(): null {
   useEffect(() => {

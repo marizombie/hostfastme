@@ -1,19 +1,13 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
-import io from 'socket.io-client';
 import { toast } from 'react-hot-toast';
 // import useWebSocket from "@/hooks/useWebSocket";
 import config from "@/config";
-
-interface Notification {
-  status: "success" | "error";
-  message: string;
-}
 
 // All the client wrappers are here (they can't be in server components)
 // 1. SessionProvider: Allow the useSession from next-auth (find out if user is auth or not)
