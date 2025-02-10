@@ -24,6 +24,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // By default, it'll store the user in the database
 // See more: https://shipfa.st/docs/features/payments
 export async function POST(req: NextRequest) {
+  console.log("STRIPE POST")
   
   await connectMongo();
 
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
   eventType = event.type;
+  console.log(eventType)
 
   try {
     switch (eventType) {
@@ -124,14 +126,17 @@ export async function POST(req: NextRequest) {
             sendTelegramMessage('Github username not given:' + gitUsername);
             throw Error('GitHub username retrieval failed');
           }
+          console.log(gitUsername)
 
           const isValidated = await validateGitHubUsername(gitUsername);
           if (!isValidated) {
             sendTelegramMessage('Github username validation failed:' + gitUsername);
             const clientIdMatch = (event.data.object as any).success_url.match(/[?&]clientId=([^&]+)/);
             const clientId = clientIdMatch ? clientIdMatch[1] : null;
+            console.log(clientId)
             if (clientId) {
               await new Promise(res => setTimeout(res, 5000));
+              console.log("sendNotificationToClient")
               sendNotificationToClient(clientId, {
                 type: 'error',
                 message: 'GitHub username validation failed',
