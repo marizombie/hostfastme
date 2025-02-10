@@ -20,14 +20,11 @@ export async function GET(request: Request) {
       const data = JSON.stringify({ type: 'connected', message: 'Connected' });
       controller.enqueue(new TextEncoder().encode(`data: ${data}\n\n`));
 
-      // Handle client disconnect
-      request.signal.onabort = () => {
-        clients.delete(clientId);
-        controller.close();
-      };
       request.signal.addEventListener('abort', () => {
-        clients.delete(clientId);
-        controller.close();
+        if (clients.has(clientId)) {
+          clients.delete(clientId);
+          controller.close();
+        }
       });
     },
   });
