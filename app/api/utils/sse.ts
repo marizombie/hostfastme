@@ -8,6 +8,11 @@ export function sendNotificationToClient(clientId: string, data: { type: string;
   const controller = clients.get(clientId);
   if (controller) {
     const message = `data: ${JSON.stringify(data)}\n\n`;
-    controller.enqueue(new TextEncoder().encode(message));
+    try {
+      controller.enqueue(new TextEncoder().encode(message));
+    } catch (error) {
+      // If the stream is closed or errored, remove the client
+      clients.delete(clientId);
+    }
   }
 }

@@ -28,8 +28,10 @@ const ClientLayout = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    eventSource.onerror = () => {
+    eventSource.onerror = (errorEvent) => {
       console.error('SSE error');
+      console.error(errorEvent)
+      console.log(errorEvent)
       eventSource.close();
       localStorage.removeItem('clientId')
     };

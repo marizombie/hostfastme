@@ -25,6 +25,10 @@ export async function GET(request: Request) {
         clients.delete(clientId);
         controller.close();
       };
+      request.signal.addEventListener('abort', () => {
+        clients.delete(clientId);
+        controller.close();
+      });
     },
   });
 
