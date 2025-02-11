@@ -19,28 +19,41 @@ const ClientLayout = ({ children }: { children: ReactNode }) => {
     const clientIdMatch = window.location.href.match(/[?&]clientId=([^&]+)/);
     const clientId = clientIdMatch ? clientIdMatch[1] : null;
     if (clientId) {
-    const eventSource = new EventSource(`/api/sse?clientId=${clientId}`);
+      const eventSource = new EventSource(`/api/sse?clientId=${clientId}`);
 
-    eventSource.onmessage = (event: MessageEvent) => {
-      const data = JSON.parse(event.data) as { type: string; message: string };
-      if (data.message !== "Connected") {
-        toast(data.message)
-      }
-    };
+      eventSource.onopen = () => {
+        console.log('SSE connection opened');
+      };
 
-    eventSource.onerror = (errorEvent) => {
-      console.error('SSE error');
-      console.error(errorEvent)
-      console.log(errorEvent)
-      eventSource.close();
-      localStorage.removeItem('clientId')
-    };
+      eventSource.onmessage = (event: MessageEvent) => {
+        const data = JSON.parse(event.data) as { type: string; message: string };
+        if (data.message !== "Connected") {
+          toast(data.message, {
+            duration: 5000,
+            style: { 
+              background: '#ff5555',
+              'color': 'white'
+            },
+          })
+        }
+      };
 
-    return () => {
-      eventSource.close();
-      localStorage.removeItem('clientId')
-    };
-  }
+      eventSource.onerror = (errorEvent) => {
+        console.error('SSE error');
+        console.log('EventSource details:', {
+          url: eventSource.url,
+          readyState: eventSource.readyState,
+        });
+        console.log(errorEvent)
+        eventSource.close();
+        localStorage.removeItem('clientId')
+      };
+
+      return () => {
+        eventSource.close();
+        localStorage.removeItem('clientId')
+      };
+    }
   }, []);
   // useWebSocket();
   // useEffect(() => {

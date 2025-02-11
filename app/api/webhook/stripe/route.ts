@@ -135,7 +135,6 @@ export async function POST(req: NextRequest) {
             const clientId = clientIdMatch ? clientIdMatch[1] : null;
             console.log(clientId)
             if (clientId) {
-              await new Promise(res => setTimeout(res, 5000));
               console.log("sendNotificationToClient")
               sendNotificationToClient(clientId, {
                 type: 'error',
